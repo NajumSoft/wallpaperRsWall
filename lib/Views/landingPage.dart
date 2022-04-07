@@ -13,7 +13,7 @@ class landingPage extends StatefulWidget {
 }
 
 class _landingPageState extends State<landingPage> {
-  final logicHubController = Get.put(logicHub());
+  final logicHubController = Get.find<logicHub>();
 
   int _currentPage = 0;
   List<String> urls = [

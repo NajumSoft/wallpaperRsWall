@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rswall/Views/home.dart';
 import 'package:rswall/Views/landingPage.dart';
 
 void main() {
@@ -13,11 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'RsWall',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: landingPage(),
+      home: home(),
     );
   }
 }

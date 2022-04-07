@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class demiData {
+class sampleData {
   List<String> wallpapers = [];
   List<dynamic> categories = [
     {
