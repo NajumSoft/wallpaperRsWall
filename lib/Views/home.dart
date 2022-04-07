@@ -14,6 +14,12 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   final logicHubController = Get.put(logicHub());
   @override
+  void initState() {
+    logicHubController.getImages();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
@@ -36,7 +42,13 @@ class _homeState extends State<home> {
               letterSpacing: 1.5),
         ),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                logicHubController.getImages();
+              },
+              icon: Icon(Icons.search))
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -136,7 +148,7 @@ class _homeState extends State<home> {
               SizedBox(
                 height: 10,
               ),
-              GridView.builder(
+              Obx(() => GridView.builder(
                   physics: ScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -144,7 +156,7 @@ class _homeState extends State<home> {
                       crossAxisSpacing: 5.0,
                       crossAxisCount: 3,
                       childAspectRatio: .5),
-                  itemCount: sampleData().categories.length,
+                  itemCount: logicHubController.imges.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return InkWell(
                       onTap: () {
@@ -157,12 +169,12 @@ class _homeState extends State<home> {
                             color: Color.fromARGB(255, 189, 189, 189),
                             image: DecorationImage(
                                 image: NetworkImage(
-                                    sampleData().categories[index]['img']),
+                                    logicHubController.imges[index]),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(15)),
                       ),
                     );
-                  }),
+                  })),
             ],
           ),
         ),
