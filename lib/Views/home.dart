@@ -16,15 +16,27 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Colors.black,
+        child: Center(
+            child: Text(
+          'Comming Soon',
+          style: TextStyle(color: Colors.white),
+        )),
+      ),
+      backgroundColor: Color.fromARGB(90, 53, 53, 53),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          'Wall Studio',
-          style:
-              TextStyle(fontSize: 25.0, color: Colors.grey, letterSpacing: 1.5),
+          'Zedge',
+          style: TextStyle(
+              fontSize: 25.0,
+              color: Color.fromARGB(255, 255, 255, 255),
+              letterSpacing: 1.5),
         ),
         centerTitle: true,
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -47,6 +59,7 @@ class _homeState extends State<home> {
               //     },
               //   ),
               // ),
+
               SizedBox(
                 height: 5,
               ),
@@ -55,7 +68,7 @@ class _homeState extends State<home> {
                 style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w800,
-                    color: Color.fromARGB(255, 0, 0, 0)),
+                    color: Color.fromARGB(255, 255, 255, 255)),
               ),
               SizedBox(
                 height: 5,
@@ -118,7 +131,7 @@ class _homeState extends State<home> {
                 style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w800,
-                    color: Color.fromARGB(255, 0, 0, 0)),
+                    color: Color.fromARGB(255, 248, 248, 248)),
               ),
               SizedBox(
                 height: 10,
@@ -126,11 +139,11 @@ class _homeState extends State<home> {
               GridView.builder(
                   physics: ScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 2.0 / 3.0,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 5.0,
+                      crossAxisSpacing: 5.0,
+                      crossAxisCount: 3,
+                      childAspectRatio: .5),
                   itemCount: sampleData().categories.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return InkWell(
@@ -155,6 +168,5 @@ class _homeState extends State<home> {
         ),
       ),
     );
-    ;
   }
 }
