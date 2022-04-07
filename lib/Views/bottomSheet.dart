@@ -17,7 +17,7 @@ class _bottomSheetState extends State<bottomSheet> {
 
   dynamic _wallpaperFile = 'Unknown';
 
-  Future<void> setWallpaperFromFile() async {
+  Future<void> setWallpaperHomeScreen() async {
     dynamic result;
     Navigator.pop(context);
     var file = await DefaultCacheManager()
@@ -26,6 +26,48 @@ class _bottomSheetState extends State<bottomSheet> {
     try {
       result = await WallpaperManager.setWallpaperFromFile(
           file.path, WallpaperManager.HOME_SCREEN);
+      Get.snackbar('Wallpaper Set', 'Please see your wallpaper');
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperFile = result;
+    });
+  }
+
+  Future<void> setWallpaperLockScreen() async {
+    dynamic result;
+    Navigator.pop(context);
+    var file = await DefaultCacheManager()
+        .getSingleFile(logicHubController.currentWallpaper.value);
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await WallpaperManager.setWallpaperFromFile(
+          file.path, WallpaperManager.LOCK_SCREEN);
+      Get.snackbar('Wallpaper Set', 'Please see your wallpaper');
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperFile = result;
+    });
+  }
+
+  Future<void> setWallpaperBoth() async {
+    dynamic result;
+    Navigator.pop(context);
+    var file = await DefaultCacheManager()
+        .getSingleFile(logicHubController.currentWallpaper.value);
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await WallpaperManager.setWallpaperFromFile(
+          file.path, WallpaperManager.BOTH_SCREEN);
       Get.snackbar('Wallpaper Set', 'Please see your wallpaper');
     } on PlatformException {
       result = 'Failed to get wallpaper.';
@@ -62,7 +104,7 @@ class _bottomSheetState extends State<bottomSheet> {
             ),
             InkWell(
               onTap: () {
-                setWallpaperFromFile();
+                setWallpaperHomeScreen();
                 print(logicHubController.currentWallpaper.value);
               },
               child: ListTile(
@@ -77,7 +119,9 @@ class _bottomSheetState extends State<bottomSheet> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                setWallpaperLockScreen();
+              },
               child: ListTile(
                 leading: Icon(
                   Icons.lock,
@@ -89,7 +133,9 @@ class _bottomSheetState extends State<bottomSheet> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                setWallpaperBoth();
+              },
               child: ListTile(
                 leading: Icon(
                   Icons.screen_lock_landscape,

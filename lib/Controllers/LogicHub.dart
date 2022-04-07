@@ -11,6 +11,7 @@ class logicHub extends GetxController {
   var baseUrl = 'https://api.pexels.com/v1/'.obs;
   var currentWallpaper = 'from controller'.obs;
   List imges = [].obs;
+
   void getImages() async {
     try {
       Dio dio = new Dio();
