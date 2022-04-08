@@ -68,7 +68,7 @@ class _bottomSheetState extends State<bottomSheet> {
     try {
       result = await WallpaperManager.setWallpaperFromFile(
           file.path, WallpaperManager.BOTH_SCREEN);
-      Get.snackbar('Wallpaper Set', 'Please see your wallpaper');
+      Get.snackbar('Wallpaper BOTH_SCREEN', 'Please see your wallpaper');
     } on PlatformException {
       result = 'Failed to get wallpaper.';
     }

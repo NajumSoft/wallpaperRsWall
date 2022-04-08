@@ -22,7 +22,7 @@ class logicHub extends GetxController {
       var res = response.data;
       List s = res['photos'];
       for (var i = 0; i <= s.length; i++) {
-        imges.add(s[i]['src']['medium']);
+        imges.add(s[i]['src']['large']);
         print(imges);
       }
     } catch (e) {

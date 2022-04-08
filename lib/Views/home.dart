@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rswall/Controllers/LogicHub.dart';
 import 'package:rswall/Models/sampledata.dart';
 import 'package:rswall/Views/landingPage.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -13,9 +14,17 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   final logicHubController = Get.put(logicHub());
+  // final BannerAd myBanner = BannerAd(
+  //   adUnitId: BannerAd.testAdUnitId,
+  //   size: AdSize.banner,
+  //   request: AdRequest(),
+  //   listener: BannerAdListener(),
+  // );
+
   @override
   void initState() {
     logicHubController.getImages();
+    // myBanner.load();
     super.initState();
   }
 
@@ -55,6 +64,11 @@ class _homeState extends State<home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Container(
+              //   height: 80,
+              //   width: 300,
+              //   child: AdWidget(ad: myBanner),
+              // ),
               // Container(
               //   height: 60.0,
               //   child: ListView.builder(
