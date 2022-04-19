@@ -26,10 +26,12 @@ class _landingPageState extends State<landingPage> {
         AnimatedSwitcher(
           duration: Duration(microseconds: 500),
           child: Container(
-            key: ValueKey<String>(logicHubController.imges[this._currentPage]),
+            // key: ValueKey<String>(logicHubController.imges[logicHubController.]),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(logicHubController.imges[_currentPage]),
+                    image: NetworkImage(logicHubController.imges[
+                            logicHubController.selectedWallpaperIdIs.value]
+                        ['src']['tiny']),
                     fit: BoxFit.cover)),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
@@ -46,6 +48,7 @@ class _landingPageState extends State<landingPage> {
               onPageChanged: (int page) {
                 setState(() {
                   this._currentPage = page;
+                  this.logicHubController.selectedWallpaperIdIs.value = page;
                 });
               },
               itemBuilder: ((BuildContext context, int index) {
@@ -54,7 +57,10 @@ class _landingPageState extends State<landingPage> {
                   child: GestureDetector(
                     onTap: () {
                       Get.to(imgdetailView(
-                          context, logicHubController.imges[index]));
+                          context,
+                          logicHubController.imges[logicHubController
+                              .selectedWallpaperIdIs
+                              .value]['src']['original']));
                     },
                     child: Hero(
                       tag: 'img',
@@ -69,8 +75,9 @@ class _landingPageState extends State<landingPage> {
                               ),
                             ],
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    logicHubController.imges[index]),
+                                image: NetworkImage(logicHubController.imges[
+                                    logicHubController.selectedWallpaperIdIs
+                                        .value]['src']['large2x']),
                                 fit: BoxFit.cover),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(32))),

@@ -54,7 +54,7 @@ class _homeState extends State<home> {
         actions: [
           IconButton(
               onPressed: () {
-                logicHubController.getImages();
+                logicHubController.getMoreImages();
               },
               icon: Icon(Icons.search))
         ],
@@ -172,23 +172,32 @@ class _homeState extends State<home> {
                       childAspectRatio: .5),
                   itemCount: logicHubController.imges.length,
                   itemBuilder: (BuildContext ctx, index) {
+                    print(index);
                     return InkWell(
                       onTap: () {
                         Get.to(landingPage());
-                        print('helo');
+                        print(index);
+                        logicHubController.selectedWallpaperIdIs.value =
+                            index.toInt();
+                        // print(logicHubController.selectedWallpaperIdIs);
+                        // logicHubController.getWallpaper();
                       },
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: Color.fromARGB(255, 189, 189, 189),
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    logicHubController.imges[index]),
+                                image: NetworkImage(logicHubController
+                                    .imges[index]['src']['tiny']),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(15)),
                       ),
                     );
                   })),
+              InkWell(
+                onTap: () {},
+                child: Text('Load More..'),
+              )
             ],
           ),
         ),
